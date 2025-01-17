@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wesen Tech</title>
+    <style>
+        :root {
+            --primary-color: #FF6F00;
+            --secondary-color: #005F73;
+            --background-color: #2E2E2E;
+            --text-color: #EDEDED;
+            --button-color: #FFD60A;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center; /* Centraliza verticalmente */
+        }
+
+        .header-content h1 {
+            font-size: 18px;
+            margin-right: 20px; /* Espaçamento entre o título e o menu */
+        }
+
+        .header-content nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+            font-size: 14px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+            background-color: var(--secondary-color);
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+
+        .slider {
+            position: relative;
+            max-width: 100%;
+            margin: 20px auto;
+            overflow: hidden;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+
+        .slide img {
+            width: 100%;
+            display: block;
+        }
+
+        .navigation {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+        }
+
+        .navigation button {
+            background: rgba(255, 255, 255, 0.5);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .navigation button:hover {
+            background: rgba(255, 255, 255, 0.8);
+        }
+
+        .dots {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            margin: 0 5px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .dot.active {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        nav a:hover {
+            background-color: #5a6268;
+        }
+
+        .container {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .product {
+            border: 1px solid #ffffff;
+            border-radius: 10px;
+            background: #ffffff;
+            padding: 15px;
+            text-align: center;
+            display: flex;
+            flex-direction: column; /* Faz com que os elementos fiquem em uma coluna */
+            align-items: center; /* Centraliza os elementos horizontalmente */
+        }
+
+        .product img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .product h3 {
+            margin: 10px 0;
+            font-size: 1.2em;
+            color: #2E2E2E;
+        }
+
+        .product p {
+            font-size: 0.9em;
+            margin: 10px 0;
+        }
+
+        .old-price {
+            color: red; /* Cor vermelha para o preço original */
+            text-decoration: line-through; /* Risco cortando o preço original */
+            margin-right: 10px; /* Espaçamento entre os preços */
+        }
+
+        .new-price {
+            color: #00FF00; /* Cor para o preço novo (exemplo: verde) */
+            font-weight: bold; /* Destaque no preço novo */
+        }
+
+        .product button {
+            background-color: var(--button-color);
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .product button:hover {
+            background-color: #0056b3;
+        }
+
+        footer {
+            background-color: var(--secondary-color);
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .banner {
+            width: 100%; /* Faz o banner ocupar toda a largura do container */
+            height: auto; /* Mantém a proporção original */
+            max-width: 1200px; /* Define o comprimento máximo para evitar exageros */
+            margin: 0 auto; /* Centraliza o banner no container */
+            object-fit: contain; /* Garante que o banner não seja cortado nem distorcido */
+        }
+
+        .banner-container {
+            width: 100%;
+            max-width: 1200px; /* Define o limite máximo para o comprimento do container */
+            margin: 0 auto; /* Centraliza o container no layout */
+            overflow: hidden; /* Evita problemas de vazamento de conteúdo */
+        }
+
+        @media (max-width: 768px) {
+            .banner {
+                width: 100%; /* Garante que o banner ocupe toda a largura da tela */
+                height: auto; /* Mantém a proporção */
+                max-width: 100%; /* Remove qualquer limite de comprimento */
+            }
+        }
+
+        .fundo {
+            border: 1px solid #3f3c3c;
+            border-radius: 10px;
+            background: #3f3c3c;
+            padding: 15px;
+            text-align: left;
+            display: flex;
+            flex-direction: column; /* Faz com que os elementos fiquem em uma coluna */
+            align-items: center; /* Centraliza os elementos horizontalmente */
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Wesen Tech</h1>
+        <h1>O Melhor da Tecnologia</h1>
+        
+    </header>
+
+    <div class="slider">
+        <div class="slides">
+            <div class="slide">
+                <img src="img/Banner-Frete.png" alt="Slide 1" class="banner">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const slides = document.querySelector('.slides');
+        const dots = document.querySelectorAll('.dot');
+        let currentSlide = 0;
+
+        document.getElementById('next').addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % dots.length;
+            updateSlider();
+        });
+
+        document.getElementById('prev').addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + dots.length) % dots.length;
+            updateSlider();
+        });
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentSlide = index;
+                updateSlider();
+            });
+        });
+
+        function updateSlider() {
+            slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[currentSlide].classList.add('active');
+        }
+    </script>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="products.html">Produtos</a>
+        <a href="about.html">Sobre Nós</a>
+        <a href="contato.html">Contato</a>
+    </nav>
+
+    <div style="margin: 20px">
+        <h1>Entre em Contato Conosco</h1>
+        <main class="container">
+            <div class="fundo">
+                <h3>Na Wesen Tech, estamos sempre prontos para atender você! Seja para esclarecer dúvidas sobre nossos produtos,<br> receber sugestões, resolver problemas ou simplesmente bater um papo sobre as novidades do mundo da tecnologia<br>
+                    Existem diversas formas de entrar em contato conosco para garantir que sua experiência seja a melhor possível:<br>
+                    <br>
+                    E-mail:<br>
+                    <br>
+                    Para perguntas gerais, suporte técnico ou solicitações específicas, envie-nos um e-mail para:<br>
+                    📧 contato@wesentech.com<br>
+                    Garantimos uma resposta rápida e completa para atender suas necessidades.<br>
+                    <br>
+                    WhatsApp:<br>
+                    <br>
+                    Prefere algo mais ágil? Envie uma mensagem no WhatsApp e nossa equipe estará pronta para responder:<br>
+                    📱 (XX) XXXX-XXXX<br>
+                    Ideal para consultas rápidas sobre disponibilidade de produtos, preços ou status de pedidos.<br>
+                    <br>
+                    Telefone:<br>
+                    <br>
+                    Se você gosta do contato direto, pode nos ligar! Estamos disponíveis de segunda a sexta-feira, das 9h às 18h:<br>
+                    ☎️ (XX) XXXX-XXXX<br>
+                    <br>
+                    Redes Sociais:<br>
+                    <br>
+                    Estamos presentes nas principais redes sociais! Siga-nos para ficar por dentro das promoções, lançamentos e dicas exclusivas:<br>
+                    📸 Instagram: @WesenTech<br>
+                    📘 Facebook: Wesen Tech Oficial<br>
+                    🎥 TikTok: @Wesen_Tech</h3>
+            </div>
+        </main>
+
+    <footer>
+        <p>&copy; 2025 Wesen Tech Store. O SITE NÃO É REAL, APENAS TESTE.</p>
+    </footer>
+</body>
+</html>
